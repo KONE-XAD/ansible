@@ -1,4 +1,4 @@
 # ansible
-ansible for websrv
+ansible for centos
 
 ## ansible for nginx
