@@ -6,6 +6,10 @@ max_auth_tries: 6
 pubkey_authentication: yes
 
 
+### For sync datetime
+remote_ntp_ip: ntp1.aliyun.com
+
+
 ### For create user and group
 common_user: manager
 common_group: manager
