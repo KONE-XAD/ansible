@@ -1,0 +1,6 @@
+---
+- hosts: all
+  roles:
+    - sys_optimi
+  tags:
+    - sys_optimi

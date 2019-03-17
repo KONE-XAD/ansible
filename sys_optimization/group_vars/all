@@ -1,0 +1,20 @@
+### For sshd
+sshd_port: 22
+listen_address: 0.0.0.0
+permit_root_login: yes
+max_auth_tries: 6
+pubkey_authentication: yes
+
+
+### For create user and group
+common_user: manager
+common_group: manager
+common_id: '666'
+
+
+# For make manager dir
+pkg_dir: /server/tools
+spts_dir: /server/scripts
+logs_dir: /app/logs
+bak_dir: /backup
+data_dir: /data

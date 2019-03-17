@@ -1,0 +1,4 @@
+---
+### Restart sshd for render sshd_conf
+- name: Restart sshd
+  service: name=sshd state=restarted

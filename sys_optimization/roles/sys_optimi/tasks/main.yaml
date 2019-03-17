@@ -1,0 +1,59 @@
+---
+### Add repo
+- name: Add base repo
+  yum_repostory:
+    name: base
+    description: Base aliyun repository
+    baseurl: http://mirrors.aliyun.com/centos/$releasever/os/$basearch/
+    gpgcheck: no    
+- name: Add epel repo
+  yum_repository:
+    name: epel
+    description: Epel aliyun repository
+    baseurl: http://mirrors.aliyun.com/epel/7/$basearch
+    gpgcheck: no
+
+### Install common package
+- name : Install common package 
+  yum: name={{ packages }} state=present
+  vars:
+    packages:
+      - lrzsz
+      - wget
+      - unzip
+      - ntpdate
+      - rsync
+      - nfs-utils
+
+### Disabled firewalld
+- name: Disabled firewalld
+  service: name=firewalld state=stopped enabled=no
+
+### Disabled selinux
+- name: Disabled selinux
+  selinux: state=disabled
+
+### Optimization sshd
+  template: src=sshd_config.j2 dest=/etc/ssh/sshd_config
+  notify: Restart sshd
+
+### Sync datetime for remote ntp
+- name: Sync datetime
+  shell: ntpdate {{ remote_ntp_ip }}
+  ignore_errors: yes
+
+### Create manager user and group
+- name: Creat group {{ common_user }}
+  group: name={{  common_user }} gid={{ common_id }} state=present
+
+- name: Creat user {{ common_user }}
+  user: name={{ common_user }} uid={{ common_id }} group={{ common_user }} state=present
+
+### Mkdri some common dir for manager
+- name: Mkdir spts_dir
+  file: path={{ item }} state=directory owner={{ common_user }} group={{ common_user }} mode=755
+  with_items:
+    - /backup
+    - /application
+    - /server/tools
+    - /server/scripts
