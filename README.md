@@ -1,7 +1,7 @@
-# ansible
-**ansible for `centos`**
+# Ansible
+> Ansible for centos
 
-## ansible for system optimization
+## Ansible for system optimization
 project `sys_optimization`
 - [x]  Add repo
 - [x]  Install common package
@@ -12,6 +12,6 @@ project `sys_optimization`
 - [x]  Create manager user and group
 - [x]  Mkdri some common dir for manager
 
-## ansible for nginx
-project `nginx`
+## Ansible for nginx
+Project `nginx`
 
