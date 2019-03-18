@@ -1,0 +1,6 @@
+---
+hosts: web
+  roles:
+    - nginx
+  tags:
+    - Depoly nginx

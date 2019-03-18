@@ -1,0 +1,9 @@
+---
+web_user: nginx
+web_id: 666
+www_root: /data/web
+www_port: 80
+www_hostname: xadocker.cn
+worder_processes: 2
+worker_connections: 65535
+

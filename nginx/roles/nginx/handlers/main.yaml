@@ -1,0 +1,4 @@
+---
+### Restart nginx if some nginx conf have been changed
+- name: Restart nginx
+  service: name=nginx state=restarted 

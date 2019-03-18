@@ -1,0 +1,9 @@
+server {
+    listen       {{ www_port }};
+    server_name  {{ www_hostname }};
+    access_log  /var/log/nginx/{{ www_hostname }}.access.log  main;
+    location / {
+        root   {{ www_root }};
+        index  index.html index.htm;
+    }
+}
