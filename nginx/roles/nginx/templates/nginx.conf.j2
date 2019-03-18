@@ -1,5 +1,5 @@
 user  {{ web_user }};
-worker_processes  {{ worder_processes }};
+worker_processes  {{ worker_processes }};
 error_log  /var/log/nginx/{{ ansible_hostname }}.error.log warn;
 pid        /var/run/nginx.pid;
 events {
