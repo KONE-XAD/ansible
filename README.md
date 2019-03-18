@@ -14,4 +14,5 @@ project `sys_optimization`
 
 ## Ansible for nginx
 Project `nginx`
+- [x]  Add simple nginx configure
 
