@@ -20,7 +20,7 @@ git clone root@172.17.53.26:monitor
     stage('push code') {
       steps {
         sh '''rm -rf /dockerweb
-cd /data/ && tar -zvcf /data/$BUILD_TAG.tar.gz
+cd /data/ && tar -zvxf /data/$BUILD_TAG.tar.gz
 '''
       }
     }
