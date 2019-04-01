@@ -30,5 +30,24 @@ cd /data/ && tar -zvxf /data/$BUILD_TAG.tar.gz
 docker run -d --name nginx-lb -v /docker/conf.d/lb.conf:/etc/nginx/conf.d/default.conf nginx:latest'''
       }
     }
+    stage('nginx-rs') {
+      parallel {
+        stage('nginx-rs-01') {
+          steps {
+            sh 'docker run -d --name nginx-rs-01 -v /data/monitor:/usr/share/nginx/html nginx:latest'
+          }
+        }
+        stage('nginx-rs02') {
+          steps {
+            sh 'docker run -d --name nginx-rs-02 -v /data/monitor:/usr/share/nginx/html nginx:latest'
+          }
+        }
+        stage('nginx-rs03') {
+          steps {
+            sh 'docker run -d --name nginx-rs-03 -v /data/monitor:/usr/share/nginx/html nginx:latest'
+          }
+        }
+      }
+    }
   }
 }
