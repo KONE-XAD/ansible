@@ -17,5 +17,18 @@ git clone root@172.17.53.26:monitor
 '''
       }
     }
+    stage('push code') {
+      steps {
+        sh '''rm -rf /dockerweb
+cd /data/ && tar -zvcf /data/$BUILD_TAG.tar.gz
+'''
+      }
+    }
+    stage('nginx-lbdocker') {
+      steps {
+        sh '''docker rm -f `docker ps -aq`
+docker run -d --name nginx-lb -v /docker/conf.d/lb.conf:/etc/nginx/conf.d/default.conf nginx:latest'''
+      }
+    }
   }
 }
