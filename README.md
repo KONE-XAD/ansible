@@ -10,7 +10,7 @@ project `sys_optimization`
 - [x]  Optimization sshd
 - [x]  Sync datetime for remote ntp
 - [x]  Create manager user and group
-- [x]  Mkdri some common dir for manager
+- [x]  Mkdir some common dir for manager
 
 ## Ansible for nginx
 Project `nginx`
