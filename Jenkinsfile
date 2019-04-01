@@ -27,7 +27,7 @@ cd /data/ && tar -zvxf /data/$BUILD_TAG.tar.gz
     stage('nginx-lbdocker') {
       steps {
         sh '''docker rm -f `docker ps -aq`
-docker run -d --name nginx-lb -v /docker/conf.d/lb.conf:/etc/nginx/conf.d/default.conf nginx:latest'''
+docker run -d --name nginx-lb -p 80:80 -v /docker/conf.d/lb.conf:/etc/nginx/conf.d/default.conf nginx:latest'''
       }
     }
     stage('nginx-rs') {
