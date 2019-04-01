@@ -1,54 +1,22 @@
 pipeline {
   agent any
   stages {
-    stage('') {
+    stage('get code') {
       environment {
         name = 'xadmin'
         web_url = 'www.xadmin.com'
       }
       steps {
-        sh '''echo first
-echo $name
-echo $web_url'''
-        sh 'echo hello'
+        sh '''echo "delete workspace"
+rm -rf ./*
+echo "get code"
+git clone git@gitee.com:kangjie1209/monitor.git
+'''
       }
     }
-    stage('second') {
-      parallel {
-        stage('second') {
-          steps {
-            sh 'echo hello'
-          }
-        }
-        stage('second_third') {
-          steps {
-            sh 'echo second_third'
-          }
-        }
-      }
-    }
-    stage('third') {
-      parallel {
-        stage('third') {
-          steps {
-            sh 'echo third'
-          }
-        }
-        stage('df') {
-          steps {
-            sh 'echo hhh'
-          }
-        }
-        stage('dfdf') {
-          steps {
-            sh 'echo fsdfs'
-          }
-        }
-      }
-    }
-    stage('end') {
+    stage('code build') {
       steps {
-        sh 'echo end'
+        sh 'touch hello.txt'
       }
     }
   }
