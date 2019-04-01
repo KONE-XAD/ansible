@@ -10,7 +10,7 @@ pipeline {
         sh '''echo "delete workspace"
 rm -rf ./*
 echo "get code"
-git clone git@gitee.com:kangjie1209/monitor.git
+git clone root@172.17.53.26:monitor
 '''
       }
     }
