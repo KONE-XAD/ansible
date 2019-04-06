@@ -1,0 +1,17 @@
+---
+hosts: all
+  roles:
+    - common
+  tags:
+    - Install docker
+hosts: master
+  roles:
+    - k8s_master
+  tags:
+    - Deploy k8s master
+
+hosts: node
+  roles:
+    - k8s_node
+  tags:
+    - Deploy k8s node

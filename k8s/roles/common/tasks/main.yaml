@@ -1,0 +1,45 @@
+---
+### Add aliyun base repo
+- name: Add aliyun base repo
+  yum_repository:
+    name: Base
+    description: Create base repo
+    baseurl:
+      - http://mirrors.aliyun.com/centos/$releasever/os/$basearch/
+      - http://mirrors.aliyuncs.com/centos/$releasever/os/$basearch/
+      - http://mirrors.cloud.aliyuncs.com/centos/$releasever/os/$basearch/
+    gpgcheck: no
+
+### Add aliyun epel repo
+- name: Add aliyun repl repo
+  yum_repository:
+    name: epel
+    description: Create epel repo
+    baseurl:
+      - http://mirrors.aliyun.com/epel/7/$basearch
+    gpgcheck: no
+
+### Disable firewall and selinux
+- name: Stop Firewalld Service
+  service: name=firewalld state=stopped enabled=no
+
+- name: Disable Selinux
+  selinux: state=disabled
+### Configure hosts
+- name: Configure hosts
+  template:
+    src: hosts.j2
+    dest: /etc/hosts
+### Copy history docker pkg: docker-1.12.6-71
+- name: Copy history docker pkg: docker-1.12.6-71
+  copy: src={{ item.src }} dest={{ item.dest }} mode{{ item.mode }}
+  with_items:
+    - {src: "docker-1.12.6-71.git3e8e77d.el7.centos.x86_64.rpm", dest: "/usr/local/src/docker-1.12.6-71.git3e8e77d.el7.centos.x86_64.rpm", mode: "0644"}
+    - {src: "docker-client-1.12.6-71.git3e8e77d.el7.centos.x86_64.rpm", dest: "/usr/local/src/docker-client-1.12.6-71.git3e8e77d.el7.centos.x86_64.rpm", mode: "0644"}
+    - {src: "docker-common-1.12.6-71.git3e8e77d.el7.centos.x86_64.rpm", dest: "/usr/local/src/docker-common-1.12.6-71.git3e8e77d.el7.centos.x86_64.rpm", mode: "0644"}
+
+### Install docker
+- name: Install docker
+  shell: yum localinstall ./docker-1.12.6-71*
+  chdir: /usr/local/src
+  creates: install.tmp

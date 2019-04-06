@@ -1,0 +1,11 @@
+---
+### Common var
+hosts:
+  - {ip: '10.0.0.11', name: 'k8s-master'}
+  - {ip: '10.0.0.12', name: 'k8s-node-1'}
+  - {ip: '10.0.0.13', name: 'k8s-node-2'}
+
+### Etcd var
+ETCD_DATA_DIR: '/var/lib/etcd/default.etcd'
+ETCD_LISTEN_CLIENT_URLS: 'http://0.0.0.0:2379'
+ETCD_ADVERTISE_CLIENT_URLS: "http://10.0.0.11:2379"
