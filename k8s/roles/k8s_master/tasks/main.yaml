@@ -1,7 +1,7 @@
 ---
 ### Install etcd
 - name: Install etcd
-  yum: name=ectd state=presetn
+  yum: name=ectd state=present
 
 ### Render etcd conf
 - name: Render etcd conf
@@ -11,3 +11,17 @@
 ### Start etcd
 - name: Start etcd
   service: name=etcd state=started
+
+### Configure flanneld
+- name: Configure flanneld
+  template: src=flanneld.j2 dest=/etc/sysconfig/flanneld mode=0644 owner=root group=root
+
+### Configure kubelet
+- name: Configure kubelet
+  template: src={{ items }}.j2 dest=/etc/kubernetes/{{ items }} mode=644 owner=root group=root backup=true 
+  with_items:
+    - apiserver.j2
+    - config.j2
+    - controller-manager.j2
+    - scheduler.j2
+

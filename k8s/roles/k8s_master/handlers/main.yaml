@@ -2,3 +2,14 @@
 ### Restart etcd
 - name: Restart etcd
   service: name=etcd state=restarted 
+### Restart kubelet
+- name: Restart kubelet
+  service: name={{ items }} state=restarted
+  with_items:
+    - kube-controller-manager
+    - kube-scheduler
+    - kube-apiserver
+    - docker
+### Restart flanneld
+- name: Restart flanneld
+  service: name=flanneld state=restarted
