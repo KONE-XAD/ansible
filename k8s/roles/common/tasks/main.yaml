@@ -43,3 +43,11 @@
   shell: yum localinstall ./docker-1.12.6-71*
   chdir: /usr/local/src
   creates: install.tmp
+
+### Install common package
+- name: Install common package
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - flannel

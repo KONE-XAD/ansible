@@ -1,0 +1,13 @@
+---
+### Install node package
+- name: Install node pakcage
+  yum: name=kubernetes-node state=present
+
+### Configure /etc/kubernetes/config
+- name: Configure /etc/kubernetes/config
+  templates: src={{ items }}.j2 dest=/etc/kubernetes/{{ items }} backup=true
+  with_items:
+    - config
+    - kubelet
+    - proxy
+  notify: Restart kube*
